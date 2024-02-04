@@ -1,0 +1,41 @@
+import random
+words_List = ['group', 'choice', 'presentation', 'knight', 'breakfast', 'railway', 'smart']
+word = random.choice(words_List)
+w = list(word)
+hidden = []
+for i in range(len(word)):
+    hidden.append('_')
+
+rows =['', '', '', '']
+rows[0] = ' o'
+rows[1] = '/|\\'
+rows[2] = ' |'
+rows[3] = '/ \\'
+a = 0
+# Main game
+while True:
+    print('Please guess the word')
+    for i in range(len(word)):
+        print(hidden[i], end =' ')
+    print()
+    player_guess = input()
+    location = []
+    for u, v in enumerate(word):
+        if v == player_guess:
+            location.append(u)
+    if player_guess in word:
+        for i in location:
+            hidden[i] = word[i]
+    else:
+        for i in range(a+1):
+            print(rows[i])
+            a += 1
+        if i == 3:
+            print('You lost')
+            break        
+    if list(word) == hidden:
+        for i in range(len(word)):
+            print(hidden[i], end = ' ')
+        print()
+        print('You won. Congratulation!')
+        break
